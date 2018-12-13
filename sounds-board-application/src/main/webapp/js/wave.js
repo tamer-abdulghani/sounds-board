@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var WaveSurfers = [];
 
 function createWaverElemet(id)
 {
     var wavesurfer = WaveSurfer.create({
         container: '#waver-' + id,
-        waveColor: 'violet',
-        progressColor: 'purple',
+        waveColor: 'lightgreen',
+        progressColor: 'green',
         height: 30
     });
 
@@ -18,6 +19,23 @@ function createWaverElemet(id)
 
     wavesurfer.on('ready', function () {
         wavesurfer.play();
-        wavesurfer.toggleMute()
+        wavesurfer.toggleMute();
+    });
+
+    WaveSurfers.push(wavesurfer);
+}
+
+function pauseAll() {
+
+    $.each(WaveSurfers, function () {
+        this.pause();
+    });
+}
+
+
+function playAll() {
+
+    $.each(WaveSurfers, function () {
+        this.play();
     });
 }

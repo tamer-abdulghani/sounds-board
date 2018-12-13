@@ -47,7 +47,7 @@ $(document).ready(function ()
 
 function initialize(dataset)
 {
-    var diameter = 300;
+    var diameter = 500;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     var bubble = d3.pack(dataset)
@@ -154,6 +154,7 @@ $(document).ready(function () {
                 $(".wavers-container")
                         .append("<div id='waver-" + data.id + "'></div>")
                 createWaverElemet(data.id);
+                $('.fa-play').removeClass('fa-play').addClass('fa-pause');
             }
         });
     });
@@ -198,5 +199,29 @@ $(document).ready(function () {
 
     });
 
+    $(document).on("click", ".fa-eye-slash", function () {
+        $('.wavers-container').hide(500);
+        $(".fa-eye-slash").removeClass("fa-eye-slash").addClass("fa-eye");
+    });
 
+    $(document).on("click", ".fa-eye", function () {
+        $('.wavers-container').show(500);
+        $(".fa-eye").removeClass("fa-eye").addClass("fa-eye-slash");
+    });
+
+    $(document).on("click", ".fa-pause", function () {
+        $('audio').each(function () {
+            this.pause();
+        });
+        pauseAll();
+        $(this).removeClass('fa-pause').addClass('fa-play');
+    });
+
+    $(document).on("click", ".fa-play", function () {
+        $('audio').each(function () {
+            this.play();
+        });
+        playAll();
+        $(this).removeClass('fa-play').addClass('fa-pause');
+    });
 });

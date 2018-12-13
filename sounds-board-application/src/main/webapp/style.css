@@ -22,6 +22,18 @@ body, html {
     height: 100%;
 }
 
+html {
+    background: url(./img/cover.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body{
+    background:none   !important;
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
@@ -33,9 +45,9 @@ p {
 a,
 a:hover,
 a:focus {
-    color: inherit;
     text-decoration: none;
     transition: all 0.3s;
+    color: white;
 }
 
 .navbar {
@@ -74,11 +86,16 @@ a:focus {
 #sidebar {
     min-width: 350px;
     max-width: 350px;
-    background: #f3f3f4;
     color: #fff;
     transition: all 0.3s;
     height: 100%;
+    background: linear-gradient(to left, rgba(255,0,0,0), rgb(207, 142, 204));
 }
+
+.search-text{
+    font-size: 0.80rem;
+}
+
 
 #sidebar.active {
     margin-left: -250px;
@@ -124,8 +141,10 @@ a:focus {
 #sidebar ul li label{
     padding: 0px;
     margin: 0px;
-    color: #898a8b;
-    font-style: italic;
+    color: white;
+    font-family: serif;
+    font-weight: bold;
+    text-shadow: 1px 1px #000000;
 }
 
 #sidebar ul li.active>a,
@@ -219,8 +238,98 @@ circle:hover {
 .card-body{
     padding: 0px;
 }
+.container{
+    padding-left: 0px;
+    margin-left: 0px;
+
+}
+
+.wavers-container{
+    position: fixed;
+    bottom: 70px;
+    width: 77%;
+    max-height: 250px;
+    overflow: auto;
+    border-top: 2px solid #d9d7d7;
+}
+
+.wavers-container div{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    background: #8c8c8b66;
+}
+
+.btn-purpple {
+    color: #fff;
+    background-color: #9821a5;
+    border-color: #a60fbf;
+}
+
+.wavers-container wave{
+    overflow: hidden !important;
+}
 
 .fixed-bottom{
     left:350px !important;
     margin-bottom: 0px !important;
+    padding-left: 50px;
+    border-top: 1px solid #dfdddd;
+    background: linear-gradient(to left, rgba(255,0,0,0), rgba(122, 124, 155, 0.33)) !important;
+}
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;   
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.icon-bar {
+    width: 60px;
+    position: fixed;
+    background-color: #555;
+    top: 20%;
+    right: 10px;
+}
+
+.icon-bar a {
+    display: block; /* Make the links appear below each other instead of side-by-side */
+    text-align: center; /* Center-align text */
+    padding: 10px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 24px;
+}
+
+.icon-bar a:hover {
+    background-color: #000; /* Add a hover color */
+}
+
+.active {
+    background-color: #4CAF50; /* Add an active/current color */
 }
