@@ -1,6 +1,8 @@
-<li>
-    <label th:text="${model.name}"></label>
-    <audio th:id="${model.id}" controls controlsList="nodownload">
-        <source th:src="${model.path}" type="audio/mpeg">
-    </audio>
-</li>
+<div>
+    <li>
+        <label th:text="${model.name}"></label>
+        <audio th:id="${model.id}" th:data-path="${model.path}" controls controlsList="nodownload">
+            <source th:src="${model.path}" type="audio/mpeg">
+        </audio>
+    </li>
+</div>

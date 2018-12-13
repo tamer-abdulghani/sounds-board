@@ -30,7 +30,7 @@ public class TrackRestController {
 
     @GetMapping("/{keyword}")
     public List<Track> getAllTracks(@PathVariable String keyword) {
-        if (keyword != null && !"".equals(keyword)) {
+        if (keyword != null && !"all".equals(keyword)) {
             List<Track> list = tracksRepository.findTracksByKeyword(keyword);
             return list;
         }

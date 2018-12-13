@@ -47,7 +47,7 @@ $(document).ready(function ()
 
 function initialize(dataset)
 {
-    var diameter = 600;
+    var diameter = 300;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     var bubble = d3.pack(dataset)
@@ -145,18 +145,28 @@ $(document).ready(function () {
             method: 'GET',
             type: 'GET', // For jQuery < 1.9
             success: function (result) {
-                console.log(result);
-                $('#sidebar ul').append(result);
+                console.log(result)
+                var elements = $(result);
+                var audio = $('li', elements);
+                $('#sidebar ul').append(audio);
                 $('#sidebar ul li:last-child audio')[0].play();
+
+                $(".wavers-container")
+                        .append("<div id='waver-" + data.id + "'></div>")
+                createWaverElemet(data.id);
             }
         });
     });
 
-    $(document).on("keypress", ".search-text, #search-btn", function (e) {
+    $(document).on("keypress", ".search-text", function (e) {
         var key = e.which;
         if (key == 13)  // the enter key code
         {
             var keyword = $(".search-text").val();
+            if (keyword === "")
+            {
+                keyword = "all";
+            }
             $.ajax({
                 url: "http://localhost:8080/track/" + keyword
             }).then(function (result) {
@@ -168,4 +178,25 @@ $(document).ready(function () {
             return false;
         }
     });
+
+    $(document).on("click", "#search-btn", function (e) {
+
+        var keyword = $(".search-text").val();
+        if (keyword === "")
+        {
+            keyword = "all";
+        }
+        $.ajax({
+            url: "http://localhost:8080/track/" + keyword
+        }).then(function (result) {
+            $(".bubbles-container").html("");
+            dataset = []
+            dataset["children"] = result;
+            initialize(dataset);
+        });
+        return false;
+
+    });
+
+
 });
