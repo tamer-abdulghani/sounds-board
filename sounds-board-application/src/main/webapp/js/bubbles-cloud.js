@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 
+
+/*
+ * Below code is inspired and taken from this page:
+ * https://bl.ocks.org/alokkshukla/3d6be4be0ef9f6977ec6718b2916d168
+ */
+
 $(document).ready(function ()
 {
     $.ajax({
@@ -13,36 +19,6 @@ $(document).ready(function ()
         dataset["children"] = result;
         initialize(dataset);
     });
-    /*
-     dataset = {
-     "children": [
-     {"name": "Olives", "played_count": 4319},
-     {"name": "Tea", "played_count": 4159},
-     {"name": "Mashed Potatoes", "played_count": 2583},
-     {"name": "Boiled Potatoes", "played_count": 2074},
-     {"name": "Milk", "played_count": 1894},
-     {"name": "Chicken Salad", "played_count": 1809},
-     {"name": "Vanilla Ice Cream", "played_count": 1713},
-     {"name": "Cocoa", "played_count": 1636},
-     {"name": "Lettuce Salad", "played_count": 1566},
-     {"name": "Lobster Salad", "played_count": 1511},
-     {"name": "Chocolate", "played_count": 1489},
-     {"name": "Apple Pie", "played_count": 1487},
-     {"name": "Orange Juice", "played_count": 1423},
-     {"name": "American Cheese", "played_count": 1372},
-     {"name": "Green Peas", "played_count": 1341},
-     {"name": "Assorted Cakes", "played_count": 1331},
-     {"name": "French Fried Potatoes", "played_count": 1328},
-     {"name": "Potato Salad", "played_count": 1306},
-     {"name": "Baked Potatoes", "played_count": 1293},
-     {"name": "Roquefort", "played_count": 1273},
-     {"name": "Stewed Prunes", "played_count": 1268}]
-     };
-     */
-
-
-
-
 });
 
 function initialize(dataset)
@@ -110,7 +86,7 @@ function initialize(dataset)
             })
             .attr("font-family", "sans-serif")
             .attr("font-size", function (d) {
-                return d.r / 5;
+                return d.r / 4;
             })
             .attr("fill", "white");
 
@@ -150,6 +126,12 @@ $(document).ready(function () {
                 var audio = $('li', elements);
                 $('#sidebar ul').append(audio);
                 $('#sidebar ul li:last-child audio')[0].play();
+                $('#sidebar ul li:last-child audio')[0].addEventListener("play", function () {
+                    playWaveElement(data.id);
+                });
+                $('#sidebar ul li:last-child audio')[0].addEventListener("pause", function () {
+                    pauseWaveElement(data.id);
+                });
 
                 $(".wavers-container")
                         .append("<div id='waver-" + data.id + "'></div>")
@@ -223,5 +205,29 @@ $(document).ready(function () {
         });
         playAll();
         $(this).removeClass('fa-play').addClass('fa-pause');
+    });
+
+    $(document).on("click", ".fa-sort-amount-down", function () {
+        $('audio').each(function () {
+            audioVolumeOut(this);
+        });
+    });
+
+    $(document).on("click", ".fa-sort-amount-up", function () {
+        $('audio').each(function () {
+            audioVolumeIn(this);
+        });
+    });
+
+    $(document).on("play", "audio", function () {
+        alert($(this).attr('id'));
+
+    });
+
+    $(document).on("input", ".slider", function () {
+        $('audio').each(function () {
+            this.volume = parseFloat($('.slider').val()) / 100;
+        });
+
     });
 });

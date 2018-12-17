@@ -11,7 +11,9 @@ function createWaverElemet(id)
         container: '#waver-' + id,
         waveColor: 'lightgreen',
         progressColor: 'green',
-        height: 30
+        height: 30,
+        cursorColor: 'white',
+        cursorWidth: 2
     });
 
     var path = $("audio#" + id).data("path");
@@ -38,4 +40,26 @@ function playAll() {
     $.each(WaveSurfers, function () {
         this.play();
     });
+}
+
+function playWaveElement(id) {
+    $.each(WaveSurfers, function () {
+        if (this.container.id === "waver-" + id)
+        {
+            this.play();
+
+        }
+    });
+
+}
+
+function pauseWaveElement(id) {
+    $.each(WaveSurfers, function () {
+        if (this.container.id === "waver-" + id)
+        {
+            this.pause();
+
+        }
+    });
+
 }
